@@ -107,13 +107,14 @@ public class CarroDAO extends BaseDAO {
 
 	}
 	
-	public void delete(Long id) {
+	public boolean delete(Long id) {
+		if (id == null) {
+			return false;
+		}
 		try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(SQL_DELETE)) {
 			stmt.setLong(1, id);
 			int count = stmt.executeUpdate();
-			if (count == 0) {
-	            throw new BancoDeDadosException("Nenhum carro encontrado para exclusão com id: " + id);
-	        }
+	        return count > 0;
 		} catch (SQLException e) {
 			throw new BancoDeDadosException("Erro ao excluir carro pelo id: " + id, e);
 		}
