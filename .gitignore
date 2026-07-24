@@ -1,0 +1,13 @@
+# Eclipse
+.classpath
+.project
+.settings/
+
+# Build gerado
+build/
+
+# Logs
+*.log
+
+# Banco/dados temporários (se aplicável)
+*.tmp
