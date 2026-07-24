@@ -46,6 +46,18 @@ mvn spring-boot:run
 - ⏳ Migração para Spring Data JPA
 - ⏳ Documentação com Swagger
 
+## Fase 1 - CRUD JDBC
+
+### Evolução do CarroDAO
+
+- Centralização das instruções SQL em constantes;
+- Implementação de CRUD utilizando PreparedStatement;
+- Tratamento de valores nulos para latitude e longitude;
+- Melhoria do mapeamento de ResultSet para entidade Carro;
+- Criação de método genérico para conversão de listas;
+- Uso de Optional no retorno por ID;
+- Melhoria no tratamento de exceções de banco.
+
 ## Autor
 
 Marcio
