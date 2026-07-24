@@ -13,14 +13,14 @@ import br.com.carros.model.Carro;
 
 public class CarroDAO extends BaseDAO {
 
-	public Optional<Carro> getCarroById(long id) {
-		String sql = "select * from carro where id=?";
+	public Optional<Carro> findById(long id) {
+		String sql = "SELECT * " + " FROM carro " + " WHERE id = ?";
 		try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
 			stmt.setLong(1, id);
 			try (ResultSet rs = stmt.executeQuery()) {
 				if (rs.next()) {
 
-					Carro carro = createCarro(rs);
+					Carro carro = mapToCarro(rs);
 					return Optional.of(carro);
 				}
 			}
@@ -31,15 +31,20 @@ public class CarroDAO extends BaseDAO {
 	}
 
 	public List<Carro> findByName(String name) {
+		if (name == null || name.trim().isEmpty()) {
+			return new ArrayList<>();
+		}
 		List<Carro> carros = new ArrayList<>();
-		String sql = "SELECT * " +
-	             "FROM carro " +
-	             "WHERE LOWER(nome) LIKE ?";
+		String sql = "SELECT * " + 
+					"FROM carro " + 
+					"WHERE LOWER(nome) LIKE ? " + 
+					"ORDER BY nome";
+
 		try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
 			stmt.setString(1, "%" + name.toLowerCase() + "%");
 			try (ResultSet rs = stmt.executeQuery()) {
 				while (rs.next()) {
-					Carro carro = createCarro(rs);
+					Carro carro = mapToCarro(rs);
 					carros.add(carro);
 				}
 			}
@@ -49,7 +54,23 @@ public class CarroDAO extends BaseDAO {
 		return carros;
 	}
 
-	private Carro createCarro(ResultSet rs) throws SQLException {
+	public List<Carro> findAll() {
+		List<Carro> carros = new ArrayList<>();
+		String sql = "SELECT * FROM carro ORDER BY id";
+		try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+			try (ResultSet rs = stmt.executeQuery()) {
+				while (rs.next()) {
+					Carro carro = mapToCarro(rs);
+					carros.add(carro);
+				}
+			}
+		} catch (SQLException e) {
+			throw new BancoDeDadosException("Erro ao buscar todos os carros. ", e);
+		}
+		return carros;
+	}
+
+	private Carro mapToCarro(ResultSet rs) throws SQLException {
 		Carro carro = new Carro();
 		carro.setId(rs.getLong("id"));
 		carro.setTipo(rs.getString("tipo"));
