@@ -43,6 +43,9 @@ public class CarroDAO extends BaseDAO {
 	        "WHERE LOWER(tipo) LIKE ? " +
 	        "ORDER BY tipo";
 	
+	private static final String SQL_DELETE =
+	        "DELETE FROM carro WHERE id = ?";
+	
 	public Optional<Carro> findById(long id) {
 		try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(SQL_FIND_BY_ID)) {
 			stmt.setLong(1, id);
@@ -102,6 +105,18 @@ public class CarroDAO extends BaseDAO {
 		        "Erro ao " + operacao + " carro: " + carro.getNome(), e);
 		}
 
+	}
+	
+	public void delete(Long id) {
+		try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(SQL_DELETE)) {
+			stmt.setLong(1, id);
+			int count = stmt.executeUpdate();
+			if (count == 0) {
+	            throw new BancoDeDadosException("Nenhum carro encontrado para exclusão com id: " + id);
+	        }
+		} catch (SQLException e) {
+			throw new BancoDeDadosException("Erro ao excluir carro pelo id: " + id, e);
+		}
 	}
 
 	public List<Carro> findAll() {
