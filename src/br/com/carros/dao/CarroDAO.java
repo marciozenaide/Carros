@@ -1,4 +1,4 @@
-package br.com.livro.dao;
+package br.com.carros.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import br.com.livro.exception.BancoDeDadosException;
-import br.com.livro.model.Carro;
+import br.com.carros.exception.BancoDeDadosException;
+import br.com.carros.model.Carro;
 
 public class CarroDAO extends BaseDAO {
 

@@ -1,4 +1,4 @@
-package br.com.livro.exception;
+package br.com.carros.exception;
 
 public class BancoDeDadosException extends RuntimeException {
 

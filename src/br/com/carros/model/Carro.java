@@ -1,4 +1,4 @@
-package br.com.livro.model;
+package br.com.carros.model;
 
 public class Carro {
 	
