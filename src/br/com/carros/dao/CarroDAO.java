@@ -69,6 +69,29 @@ public class CarroDAO extends BaseDAO {
 		}
 		return carros;
 	}
+	
+	public List<Carro> findByTipo(String tipo){
+		if (tipo == null || tipo.trim().isEmpty()) {
+			return new ArrayList<>();
+		}
+		List<Carro> carros = new ArrayList<>();
+		String sql = "SELECT * " +
+	             "FROM carro " +
+	             "WHERE LOWER(tipo) LIKE ?" +
+	             "ORDER BY tipo";
+		try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+			stmt.setString(1, "%" + tipo.toLowerCase() + "%");
+			try (ResultSet rs = stmt.executeQuery()) {
+				while (rs.next()) {
+					Carro carro = mapToCarro(rs);
+					carros.add(carro);
+				}
+			}
+		} catch (SQLException e) {
+			throw new BancoDeDadosException("Erro ao buscar carro pelo tipo: ", e);
+		}
+		return carros;
+	}
 
 	private Carro mapToCarro(ResultSet rs) throws SQLException {
 		Carro carro = new Carro();
