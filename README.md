@@ -35,6 +35,17 @@ mvn spring-boot:run
 - entity
 - dto
 
+## Evolução do Projeto
+
+- ✅ Configuração do Git e GitHub
+- ✅ Estrutura inicial do projeto
+- ✅ Banco MySQL
+- ✅ Migrations com Flyway
+- ✅ Correção de problemas de encoding UTF-8
+- 🚧 Implementação do CRUD
+- ⏳ Migração para Spring Data JPA
+- ⏳ Documentação com Swagger
+
 ## Autor
 
 Marcio
