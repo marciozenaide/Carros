@@ -58,6 +58,19 @@ mvn spring-boot:run
 - Uso de Optional no retorno por ID;
 - Melhoria no tratamento de exceções de banco.
 
+- Revisão do DAO, o estado dele hoje está muito bom:
+
+✅ SQLs centralizadas em constantes.
+✅ try-with-resources em todos os acessos.
+✅ Optional<Carro> para busca por id.
+✅ Collections.emptyList() para pesquisas vazias.
+✅ Método bindCarro() evitando duplicação.
+✅ Método mapResultSet() reutilizado.
+✅ Método getNullableDouble() para tratar NULL.
+✅ save() funcionando para insert e update.
+✅ delete() retornando boolean.
+✅ Exceções encapsuladas em BancoDeDadosException
+
 ## Autor
 
 Marcio

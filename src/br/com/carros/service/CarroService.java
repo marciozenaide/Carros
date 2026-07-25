@@ -18,27 +18,27 @@ public class CarroService {
         this.carroDAO = carroDAO;
     }
 
-	public List<Carro> listar() {
+	public List<Carro> findAll() {
 		return carroDAO.findAll();
 	}
 
-	public Optional<Carro> buscarPorId(Long id) {
+	public Optional<Carro> findById(Long id) {
 		return carroDAO.findById(id);
 	}
 
-	public List<Carro> buscarPorNome(String nome) {
+	public List<Carro> findByName(String nome) {
 		return carroDAO.findByName(nome);
 	}
 
-	public List<Carro> buscarPorTipo(String tipo) {
+	public List<Carro> findByTipo(String tipo) {
 		return carroDAO.findByTipo(tipo);
 	}
-
-	public void salvar(Carro carro) {
-		carroDAO.save(carro);
+	
+	public Carro save(Carro carro) {
+	    return carroDAO.save(carro);
 	}
 
-	public boolean excluir(Long id) {
+	public boolean delete(Long id) {
 		return carroDAO.delete(id);
 	}
 

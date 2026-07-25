@@ -22,10 +22,15 @@ public class CarroDAO extends BaseDAO {
 	        "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
 	private static final String SQL_UPDATE =
-	        "UPDATE carro SET " +
-	        "nome = ?, descricao = ?, url_foto = ?, url_video = ?, " +
-	        "latitude = ?, longitude = ?, tipo = ? " +
-	        "WHERE id = ?";
+			 "UPDATE carro SET " +
+			 "nome = ?, " +
+		     "descricao = ?, " +
+		     "url_foto = ?, " +
+		     "url_video = ?, " +
+		     "latitude = ?, " +
+		     "longitude = ?, " +
+		     "tipo = ? " +
+		     "WHERE id = ?";
 	
 	private static final String SQL_FIND_BY_ID =
 	        "SELECT * FROM carro WHERE id = ?";
@@ -40,7 +45,7 @@ public class CarroDAO extends BaseDAO {
 
 	private static final String SQL_FIND_BY_TIPO =  
 			"SELECT * FROM carro " +
-	        "WHERE LOWER(tipo) LIKE ? " +
+	        "WHERE LOWER(tipo) = ? " +
 	        "ORDER BY tipo";
 	
 	private static final String SQL_DELETE =
@@ -53,11 +58,21 @@ public class CarroDAO extends BaseDAO {
 				if (rs.next()) {
 				    return Optional.of(mapToCarro(rs));
 				}
+				return Optional.empty();
 			}
 		} catch (SQLException e) {
 			throw new BancoDeDadosException("Erro ao buscar carro pelo id: " + id, e);
 		}
-		return Optional.empty();
+	}
+	
+	public List<Carro> findAll() {
+		try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(SQL_FIND_ALL)) {
+			try (ResultSet rs = stmt.executeQuery()) {
+				return mapResultSet(rs);
+			}
+		} catch (SQLException e) {
+			throw new BancoDeDadosException("Erro ao buscar todos os carros. ", e);
+		}
 	}
 
 	public List<Carro> findByName(String name) {
@@ -75,19 +90,31 @@ public class CarroDAO extends BaseDAO {
 		}
 	}
 	
-	public void save(Carro carro) {
+	public List<Carro> findByTipo(String tipo){
+		if (isEmpty(tipo)) {
+			return Collections.emptyList();
+		}
+
+		try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(SQL_FIND_BY_TIPO)) {
+			stmt.setString(1, tipo.toLowerCase(Locale.ROOT));
+			try (ResultSet rs = stmt.executeQuery()) {
+				return mapResultSet(rs);
+			}
+		} catch (SQLException e) {
+			throw new BancoDeDadosException("Erro ao buscar carro pelo tipo: " + tipo,e);
+		}
+	}
+	
+	public Carro save(Carro carro) {
+		if (carro == null) {
+		    throw new IllegalArgumentException("Carro não pode ser nulo.");
+		}
 		boolean novoCarro = carro.getId() == null;
 		try (Connection conn = getConnection();
 				     PreparedStatement stmt = (novoCarro)
 				             ? conn.prepareStatement(SQL_INSERT, Statement.RETURN_GENERATED_KEYS)
 				             : conn.prepareStatement(SQL_UPDATE)) {
-			stmt.setString(1, carro.getNome());
-			stmt.setString(2, carro.getDescricao());
-			stmt.setString(3, carro.getUrlFoto());
-			stmt.setString(4, carro.getUrlVideo());
-			stmt.setObject(5, carro.getLatitude());
-			stmt.setObject(6, carro.getLongitude());
-			stmt.setString(7, carro.getTipo());
+			bindCarro(stmt, carro);
 			if (!novoCarro) {
 			    stmt.setLong(8, carro.getId());
 			}
@@ -99,6 +126,7 @@ public class CarroDAO extends BaseDAO {
 				Long id = getGeneratedId(stmt);
 				carro.setId(id);
 			}
+			return carro;
 		} catch (SQLException e) {
 			String operacao = novoCarro ? "inserir" : "alterar";
 		    throw new BancoDeDadosException(
@@ -107,10 +135,7 @@ public class CarroDAO extends BaseDAO {
 
 	}
 	
-	public boolean delete(Long id) {
-		if (id == null) {
-			return false;
-		}
+	public boolean delete(long id) {
 		try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(SQL_DELETE)) {
 			stmt.setLong(1, id);
 			int count = stmt.executeUpdate();
@@ -119,38 +144,20 @@ public class CarroDAO extends BaseDAO {
 			throw new BancoDeDadosException("Erro ao excluir carro pelo id: " + id, e);
 		}
 	}
-
-	public List<Carro> findAll() {
-		try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(SQL_FIND_ALL)) {
-			try (ResultSet rs = stmt.executeQuery()) {
-				return mapResultSet(rs);
-			}
-		} catch (SQLException e) {
-			throw new BancoDeDadosException("Erro ao buscar todos os carros. ", e);
-		}
-	}
 	
-	public List<Carro> findByTipo(String tipo){
-		if (isEmpty(tipo)) {
-			return Collections.emptyList();
-		}
-
-		try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(SQL_FIND_BY_TIPO)) {
-			stmt.setString(1, "%" + tipo.toLowerCase(Locale.ROOT) + "%");
-			try (ResultSet rs = stmt.executeQuery()) {
-				return mapResultSet(rs);
-			}
-		} catch (SQLException e) {
-			throw new BancoDeDadosException("Erro ao buscar carro pelo tipo: ", e);
-		}
+	private void bindCarro(PreparedStatement stmt, Carro carro) throws SQLException {
+	    stmt.setString(1, carro.getNome());
+	    stmt.setString(2, carro.getDescricao());
+	    stmt.setString(3, carro.getUrlFoto());
+	    stmt.setString(4, carro.getUrlVideo());
+	    stmt.setObject(5, carro.getLatitude());
+	    stmt.setObject(6, carro.getLongitude());
+	    stmt.setString(7, carro.getTipo());
 	}
 
 	private Carro mapToCarro(ResultSet rs) throws SQLException {
 		Carro carro = new Carro();
-		long id = rs.getLong("id");
-		if (!rs.wasNull()) {
-		    carro.setId(id);
-		}
+		carro.setId(rs.getLong("id"));
 		carro.setTipo(rs.getString("tipo"));
 		carro.setNome(rs.getString("nome"));
 		carro.setDescricao(rs.getString("descricao"));
@@ -162,7 +169,7 @@ public class CarroDAO extends BaseDAO {
 		return carro;
 	}
 	
-	private Long getGeneratedId(Statement stmt) {
+	private long getGeneratedId(Statement stmt) {
 		try (ResultSet rs = stmt.getGeneratedKeys()) {
 			if (rs.next()) {
 			    return rs.getLong(1);
