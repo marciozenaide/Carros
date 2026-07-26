@@ -1,17 +1,14 @@
 package br.com.carros.dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class BaseDAO {
-	
-	private static final String URL = "jdbc:mysql://localhost:3306/carros";
-	private static final String USUARIO = "carro";
-	private static final String SENHA = "carro123";
+import br.com.carros.util.ConnectionFactory;
 
-	protected Connection getConnection() throws SQLException {
-		return DriverManager.getConnection(URL, USUARIO, SENHA);
-	}
+public abstract class BaseDAO {
+
+    protected Connection getConnection() throws SQLException {
+        return ConnectionFactory.getConnection();
+    }
 
 }

@@ -10,9 +10,12 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import br.com.carros.exception.BancoDeDadosException;
 import br.com.carros.model.Carro;
+import br.com.carros.util.LogFactory;
 
 public class CarroDAO extends BaseDAO {
 	
@@ -50,6 +53,9 @@ public class CarroDAO extends BaseDAO {
 	
 	private static final String SQL_DELETE =
 	        "DELETE FROM carro WHERE id = ?";
+	
+	private static final Logger LOGGER =
+	        LogFactory.getLogger(CarroDAO.class);
 	
 	public Optional<Carro> findById(long id) {
 		try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(SQL_FIND_BY_ID)) {
@@ -109,6 +115,7 @@ public class CarroDAO extends BaseDAO {
 		if (carro == null) {
 		    throw new IllegalArgumentException("Carro não pode ser nulo.");
 		}
+		LOGGER.info("Salvando carro: " + carro.getNome());
 		boolean novoCarro = carro.getId() == null;
 		try (Connection conn = getConnection();
 				     PreparedStatement stmt = (novoCarro)
@@ -128,15 +135,16 @@ public class CarroDAO extends BaseDAO {
 			}
 			return carro;
 		} catch (SQLException e) {
+			LOGGER.log(Level.SEVERE,"Erro ao salvar carro: " + carro.getNome(), e);
 			String operacao = novoCarro ? "inserir" : "alterar";
-		    throw new BancoDeDadosException(
-		        "Erro ao " + operacao + " carro: " + carro.getNome(), e);
+		    throw new BancoDeDadosException("Erro ao " + operacao + " carro: " + carro.getNome(), e);
 		}
 
 	}
 	
 	public boolean delete(long id) {
 		try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(SQL_DELETE)) {
+			LOGGER.info("Excluindo carro id=" + id);
 			stmt.setLong(1, id);
 			int count = stmt.executeUpdate();
 	        return count > 0;
