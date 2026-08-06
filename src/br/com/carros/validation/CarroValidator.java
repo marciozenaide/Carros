@@ -1,5 +1,6 @@
 package br.com.carros.validation;
 
+import br.com.carros.i18n.Messages;
 import br.com.carros.model.Carro;
 
 public class CarroValidator {
@@ -13,54 +14,50 @@ public class CarroValidator {
 		ValidatorResult result = new ValidatorResult();
 
 		// obrigatórios
-		validarObrigatorio("O nome é obrigatório.", carro.getNome(), result);
-		validarObrigatorio("A descrição é obrigatória.", carro.getDescricao(), result);
-		validarObrigatorio("O tipo é obrigatório.", carro.getTipo(), result);
-		validarObrigatorio("A URL da foto é obrigatória.", carro.getUrlFoto(), result);
-		validarObrigatorio("A URL do vídeo é obrigatória.", carro.getUrlVideo(), result);
+		validarObrigatorio("erro.nome.obrigatorio", carro.getNome(), result);
+		validarObrigatorio("erro.descricao.obrigatorio", carro.getDescricao(), result);
+		validarObrigatorio("erro.tipo.obrigatorio", carro.getTipo(), result);
+		validarObrigatorio("erro.urlFoto.obrigatorio", carro.getUrlFoto(), result);
+		validarObrigatorio("erro.urlVideo.obrigatorio", carro.getUrlVideo(), result);
 
+		
 		// tamanho
-		validarTamanho("O nome do carro deve conter no máximo %s caracteres.", carro.getNome(),
-				TAMANHO_TEXTO, result);
-		validarTamanho("A descrição do carro deve conter no máximo %s caracteres.", carro.getDescricao(),
-				TAMANHO_TEXTO, result);
-		validarTamanho("O tipo do carro deve conter no máximo %s caracteres.", carro.getTipo(),
-				TAMANHO_TEXTO, result);
-		validarTamanho("A URL da foto deve conter no máximo %s caracteres.", carro.getUrlFoto(),
-				TAMANHO_TEXTO, result);
-		validarTamanho("A URL do vídeo deve conter no máximo %s caracteres.", carro.getUrlVideo(),
-				TAMANHO_TEXTO, result);
+		validarTamanho("erro.nome.tamanho", carro.getNome(), TAMANHO_TEXTO, result);
+		validarTamanho("erro.descricao.tamanho", carro.getDescricao(), TAMANHO_TEXTO, result);
+		validarTamanho("erro.tipo.tamanho", carro.getTipo(),TAMANHO_TEXTO, result);
+		validarTamanho("erro.urlFoto.tamanho", carro.getUrlFoto(),TAMANHO_TEXTO, result);
+		validarTamanho("erro.urlVideo.tamanho", carro.getUrlVideo(),TAMANHO_TEXTO, result);
 		
 		// coordenadas
-		validarCoordenada("Latitude", carro.getLatitude(), LIMITE_LATITUDE, result);
-		validarCoordenada("Longitude", carro.getLongitude(), LIMITE_LONGITUDE, result);
+		validarCoordenada(carro.getLatitude(),LIMITE_LATITUDE,"erro.latitude.obrigatorio","erro.latitude.invalida",result);
+		validarCoordenada(carro.getLongitude(),LIMITE_LONGITUDE,"erro.longitude.obrigatorio","erro.longitude.invalida",result);
 
 		return result;
 
 	}
 
-	private void validarObrigatorio(String valor, String campo, ValidatorResult result) {
+	private void validarObrigatorio(String chave, String campo, ValidatorResult result) {
 		if (campo == null || campo.trim().isEmpty()) {
-			result.addErro(valor);
+			result.addErro(Messages.get(chave));
 		}
 	}
 
-	private void validarTamanho(String valor, String campo, int tamanho, ValidatorResult result) {
+	private void validarTamanho(String chave, String campo, int tamanho, ValidatorResult result) {
 		if (campo != null && campo.length() > tamanho) {
-			result.addErro(String.format(valor, tamanho));
+			result.addErro(Messages.get(chave, tamanho));
 		}
 	}
 	
-	
-	private void validarCoordenada(String nome, Double valor, int limite, ValidatorResult result) {
-		 if (valor == null) {
-		        result.addErro(nome + " é obrigatória.");
-		        return;
-		    }
+	private void validarCoordenada(Double valor, int limite, String chaveObrigatoria, String chaveInvalida, ValidatorResult result) {
 
-		    if (valor < -limite || valor > limite) {
-		        result.addErro(nome + " inválida.");
-		    }
+	    if (valor == null) {
+	        result.addErro(Messages.get(chaveObrigatoria));
+	        return;
+	    }
+
+	    if (valor < -limite || valor > limite) {
+	        result.addErro(Messages.get(chaveInvalida));
+	    }
 	}
 	
 
