@@ -3,6 +3,7 @@ package br.com.carros.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.List;
@@ -48,7 +49,7 @@ public class CarroServlet extends HttpServlet {
 	}
 
 	private void dispatch(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-
+		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("acao");
 
 		try {
@@ -129,8 +130,9 @@ public class CarroServlet extends HttpServlet {
 
 	private void editar(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 		
+		configurarResposta(resp);
 		String idCarro  = req.getParameter("id");
-		LOGGER.log(Level.INFO,"Id carro>>>>>>>>: " + idCarro);
+		LOGGER.log(Level.INFO,"Id carro: " + idCarro);
 		long id = 0;
 		if (idCarro != null && !idCarro.trim().isEmpty()) {
 		    id = Long.valueOf(idCarro);
@@ -156,6 +158,7 @@ public class CarroServlet extends HttpServlet {
 	}
 
 	private void salvar(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("UTF-8");
 		CarroValidator validator = new CarroValidator();
 		
 		Carro carro = criarCarro(req);
@@ -226,9 +229,9 @@ public class CarroServlet extends HttpServlet {
 		out.println("</div>");
 		out.println("<div>");
 		out.println("			<lable for='latitude'>" + "Latitude: " + "</lable></br>");
-		out.println("			<input type='text' name='latitude' id='latitude' value='" + value(carro.getLatitude().toString()) + "'></br>");
+		out.println("			<input type='text' name='latitude' id='latitude' value='" + carro.getLatitude() + "'></br>");
 		out.println("			<lable for='longitude'>" + "Longitude: " + "</lable></br>");
-		out.println("			<input type='text' name='longitude' id='longitude'  value='" + value(carro.getLongitude().toString()) + "'></br>");
+		out.println("			<input type='text' name='longitude' id='longitude'  value='" + carro.getLongitude() + "'></br>");
 		out.println("</div>");
 		out.println("<div>");
 		out.println("			<lable for='urlFoto'>" + "URL Foto: " + "</lable></br>");
@@ -261,8 +264,8 @@ public class CarroServlet extends HttpServlet {
 		resp.setCharacterEncoding(StandardCharsets.UTF_8.name());
 	}
 	
-	private Carro criarCarro(HttpServletRequest req) {
-
+	private Carro criarCarro(HttpServletRequest req) throws UnsupportedEncodingException {
+		
 	    Carro carro = new Carro();
 	    
 	    String id = req.getParameter("id");
