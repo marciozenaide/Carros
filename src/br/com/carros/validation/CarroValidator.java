@@ -1,36 +1,33 @@
 package br.com.carros.validation;
 
+import br.com.carros.i18n.MessageKeys;
 import br.com.carros.i18n.Messages;
 import br.com.carros.model.Carro;
 
 public class CarroValidator {
-
-	private static final int TAMANHO_TEXTO = 255;
-	private static final int LIMITE_LATITUDE = 90;
-	private static final int LIMITE_LONGITUDE = 180;
 
 	public ValidatorResult validar(Carro carro) {
 
 		ValidatorResult result = new ValidatorResult();
 
 		// obrigatórios
-		validarObrigatorio("erro.nome.obrigatorio", carro.getNome(), result);
-		validarObrigatorio("erro.descricao.obrigatorio", carro.getDescricao(), result);
-		validarObrigatorio("erro.tipo.obrigatorio", carro.getTipo(), result);
-		validarObrigatorio("erro.urlFoto.obrigatorio", carro.getUrlFoto(), result);
-		validarObrigatorio("erro.urlVideo.obrigatorio", carro.getUrlVideo(), result);
+		validarObrigatorio(MessageKeys.ERRO_NOME_OBRIGATORIO, carro.getNome(), result);
+		validarObrigatorio(MessageKeys.ERRO_DESCRICAO_OBRIGATORIO, carro.getDescricao(), result);
+		validarObrigatorio(MessageKeys.ERRO_TIPO_OBRIGATORIO, carro.getTipo(), result);
+		validarObrigatorio(MessageKeys.ERRO_URL_FOTO_OBRIGATORIO, carro.getUrlFoto(), result);
+		validarObrigatorio(MessageKeys.ERRO_URL_VIDEO_OBRIGATORIO, carro.getUrlVideo(), result);
 
 		
 		// tamanho
-		validarTamanho("erro.nome.tamanho", carro.getNome(), TAMANHO_TEXTO, result);
-		validarTamanho("erro.descricao.tamanho", carro.getDescricao(), TAMANHO_TEXTO, result);
-		validarTamanho("erro.tipo.tamanho", carro.getTipo(),TAMANHO_TEXTO, result);
-		validarTamanho("erro.urlFoto.tamanho", carro.getUrlFoto(),TAMANHO_TEXTO, result);
-		validarTamanho("erro.urlVideo.tamanho", carro.getUrlVideo(),TAMANHO_TEXTO, result);
+		validarTamanho(MessageKeys.ERRO_NOME_TAMANHO, carro.getNome(), ValidationConstants.TAMANHO_TEXTO, result);
+		validarTamanho(MessageKeys.ERRO_DESCRICAO_TAMANHO, carro.getDescricao(), ValidationConstants.TAMANHO_TEXTO, result);
+		validarTamanho(MessageKeys.ERRO_TIPO_TAMANHO, carro.getTipo(),ValidationConstants.TAMANHO_TEXTO, result);
+		validarTamanho(MessageKeys.ERRO_URL_FOTO_TAMANHO, carro.getUrlFoto(),ValidationConstants.TAMANHO_TEXTO, result);
+		validarTamanho(MessageKeys.ERRO_URL_VIDEO_TAMANHO, carro.getUrlVideo(),ValidationConstants.TAMANHO_TEXTO, result);
 		
 		// coordenadas
-		validarCoordenada(carro.getLatitude(),LIMITE_LATITUDE,"erro.latitude.obrigatorio","erro.latitude.invalida",result);
-		validarCoordenada(carro.getLongitude(),LIMITE_LONGITUDE,"erro.longitude.obrigatorio","erro.longitude.invalida",result);
+		validarCoordenada(carro.getLatitude(),ValidationConstants.LIMITE_LATITUDE,MessageKeys.ERRO_LATITUDE_OBRIGATORIO,MessageKeys.ERRO_LATITUDE_INVALIDA,result);
+		validarCoordenada(carro.getLongitude(),ValidationConstants.LIMITE_LONGITUDE,MessageKeys.ERRO_LONGITUDE_OBRIGATORIO,MessageKeys.ERRO_LONGITUDE_INVALIDA,result);
 
 		return result;
 
