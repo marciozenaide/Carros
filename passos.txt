@@ -1,0 +1,28 @@
+✔ CRUD
+✔ Validation
+✔ ResourceBundle
+✔ HtmlRenderer
+✔ CharacterEncodingFilter
+✔ SecurityHeadersFilter
+
+⬜ ContextListener
+⬜ RequestLoggingFilter
+⬜ AuthenticationFilter (fake)
+⬜ AuthorizationFilter (fake)
+⬜ CSRF Token
+
+↓
+
+REST
+
+↓
+
+Maven
+
+↓
+
+Spring Boot
+
+↓
+
+Spring Security
