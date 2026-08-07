@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.HttpServletResponse;
 
 @WebFilter("/*")
 public class CharacterEncodingFilter implements Filter {
@@ -17,6 +18,12 @@ public class CharacterEncodingFilter implements Filter {
 			throws IOException, ServletException {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
+
+		HttpServletResponse httpResponse = (HttpServletResponse) response;
+
+		httpResponse.setHeader("X-Content-Type-Options", "nosniff");
+		httpResponse.setHeader("X-Frame-Options", "DENY");
+		httpResponse.setHeader("Referrer-Policy", "strict-origin-when-cross-origin");
 
 		chain.doFilter(request, response);
 	}
