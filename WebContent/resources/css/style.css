@@ -1,0 +1,29 @@
+.lista-div {
+	width:400px;
+	height:300px;
+	overflow:auto;
+	border:1px solid #ccc;
+}
+
+.form-div {
+	width: 600px;
+    height: 400px;
+    overflow: auto;
+    border: 1px solid #ccc;
+}
+
+table {
+	border-collapse: collapse;
+	border:1px solid black;
+}
+
+.tabela-carros th,
+.tabela-carros td {
+    border: 1px solid black;
+    padding: 4px;
+}
+
+.tabela-carros {
+	table-layout: auto;
+	width: 300px;
+}

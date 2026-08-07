@@ -37,7 +37,7 @@ public class CarroServlet extends HttpServlet {
 	private static final String ACAO_EDITAR = "editar";
 	private static final String ACAO_SALVAR = "salvar";
 
-	private static final CarroHtmlRenderer renderer = new CarroHtmlRenderer();
+	private final CarroHtmlRenderer renderer = new CarroHtmlRenderer();
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -50,7 +50,7 @@ public class CarroServlet extends HttpServlet {
 	}
 
 	private void dispatch(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-		String action = req.getParameter("acao");
+		String action = req.getParameter("acao").toLowerCase();
 
 		try {
 
@@ -170,10 +170,9 @@ public class CarroServlet extends HttpServlet {
 		carroService.save(carro);
 		resp.sendRedirect("carros?acao=listar");
 	}
-
+	
 	private void configurarResposta(HttpServletResponse resp) {
-		resp.setContentType("text/html");
-		resp.setCharacterEncoding(StandardCharsets.UTF_8.name());
+	    resp.setContentType("text/html; charset=UTF-8");
 	}
 
 	private Carro criarCarro(HttpServletRequest req) throws UnsupportedEncodingException {

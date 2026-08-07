@@ -8,7 +8,7 @@ public final class Messages {
 	private Messages() {
 	}
 	
-	private static final ResourceBundle bundle = ResourceBundle.getBundle("messages");
+	private static final ResourceBundle bundle = ResourceBundle.getBundle("br.com.carros.resources.messages");
 
 	public static String get(String chave) {
 		return bundle.getString(chave);
