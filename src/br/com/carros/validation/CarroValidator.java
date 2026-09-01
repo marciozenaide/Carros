@@ -10,7 +10,7 @@ public class CarroValidator {
 
 		ValidatorResult result = new ValidatorResult();
 
-		// obrigatórios
+		// obrigatï¿½rios
 		validarObrigatorio(MessageKeys.ERRO_NOME_OBRIGATORIO, carro.getNome(), result);
 		validarObrigatorio(MessageKeys.ERRO_DESCRICAO_OBRIGATORIO, carro.getDescricao(), result);
 		validarObrigatorio(MessageKeys.ERRO_TIPO_OBRIGATORIO, carro.getTipo(), result);
@@ -45,7 +45,7 @@ public class CarroValidator {
 		}
 	}
 	
-	private void validarCoordenada(Double valor, int limite, String chaveObrigatoria, String chaveInvalida, ValidatorResult result) {
+	private void validarCoordenada(Double valor, double limite, String chaveObrigatoria, String chaveInvalida, ValidatorResult result) {
 
 	    if (valor == null) {
 	        result.addErro(Messages.get(chaveObrigatoria));
