@@ -11,3 +11,6 @@ build/
 
 # Banco/dados temporários (se aplicável)
 *.tmp
+
+# Target gerado
+target/

@@ -1,4 +1,4 @@
-package br.com.livro.exception;
+package br.com.carros.exception;
 
 public class BancoDeDadosException extends RuntimeException {
 
@@ -11,5 +11,4 @@ public class BancoDeDadosException extends RuntimeException {
 	public BancoDeDadosException(String mensagem, Throwable causa) {
 		super(mensagem, causa);
 	}
-
 }

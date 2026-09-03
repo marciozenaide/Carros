@@ -1,4 +1,4 @@
-package br.com.livro.servlets;
+package br.com.carros.servlets;
 
 import java.io.IOException;
 
@@ -14,21 +14,23 @@ public class HelloServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		resp.getWriter().print("Olá mundo Servlet");
+		resp.getWriter().print("Olï¿½ mundo Servlet");
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String nome=req.getParameter("nome");
 		String sobrenome = req.getParameter("sobrenome");
-		resp.getWriter().print("Olá mundo post: " + nome + " - " + sobrenome);
+		resp.getWriter().print("Olï¿½ mundo post: " + nome + " - " + sobrenome);
 	}
+	
 	@Override
 	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		resp.getWriter().print("Olá mundo PUT");
+		resp.getWriter().print("Olï¿½ mundo PUT");
 	}
+	
 	@Override
 	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		resp.getWriter().print("{'nome:'Olá mundo post: DELETE'}");
+		resp.getWriter().print("{'nome:'Olï¿½ mundo post: DELETE'}");
 	}
 }
