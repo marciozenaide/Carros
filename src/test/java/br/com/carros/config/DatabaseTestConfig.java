@@ -16,7 +16,7 @@ public final class DatabaseTestConfig {
 		 
 	 }
 	
-	public static void startH2() throws SQLException, IOException {
+	public static void initializeDatabase() throws SQLException, IOException {
 		//Lê schema.sql
 	    try (Connection connection = ConnectionFactory.getConnection();
 	         InputStream input = DatabaseTestConfig.class.getClassLoader().getResourceAsStream("schema.sql")) {
@@ -35,7 +35,13 @@ public final class DatabaseTestConfig {
 	        	}
 	        	
 	        	// Executa o script de criação completo
-	        	stmt.execute(sql.toString());
+	        	String[] comandos = sql.toString().split(";");
+
+                for (String comando : comandos) {
+                    if (!comando.trim().isEmpty()) {
+                        stmt.execute(comando.trim());
+                    }
+                }
 	        }
 	    }
 	}

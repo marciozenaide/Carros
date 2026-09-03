@@ -29,7 +29,7 @@ public class CarroTest {
 	 */
 	@BeforeAll
 	static void prepararBanco() throws Exception {
-		DatabaseTestConfig.startH2();
+		DatabaseTestConfig.initializeDatabase();
 	}
 	
 	@Test
