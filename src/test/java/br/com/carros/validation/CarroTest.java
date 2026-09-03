@@ -19,7 +19,6 @@ import br.com.carros.service.CarroService;
 public class CarroTest {
 
 	private CarroService carroService = new CarroService();
-	private static final DatabaseTestConfig databaseTestConfig = new DatabaseTestConfig();
 	
 	/*
 	 * 
@@ -30,7 +29,7 @@ public class CarroTest {
 	 */
 	@BeforeAll
 	static void prepararBanco() throws Exception {
-		databaseTestConfig.startH2();
+		DatabaseTestConfig.startH2();
 	}
 	
 	@Test

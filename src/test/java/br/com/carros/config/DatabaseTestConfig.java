@@ -9,14 +9,17 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import br.com.carros.util.ConnectionFactory;
-import br.com.carros.validation.CarroTest;
 
-public class DatabaseTestConfig {
+public final class DatabaseTestConfig {
 	
-	public void startH2() throws SQLException, IOException {
+	 private DatabaseTestConfig() {
+		 
+	 }
+	
+	public static void startH2() throws SQLException, IOException {
 		//Lê schema.sql
 	    try (Connection connection = ConnectionFactory.getConnection();
-	         InputStream input = CarroTest.class.getClassLoader().getResourceAsStream("schema.sql")) {
+	         InputStream input = DatabaseTestConfig.class.getClassLoader().getResourceAsStream("schema.sql")) {
 
 	        if (input == null) {
 	            throw new IllegalStateException("schema.sql não encontrado nos recursos de teste.");
