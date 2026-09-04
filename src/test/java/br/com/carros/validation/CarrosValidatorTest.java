@@ -15,9 +15,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import br.com.carros.i18n.MessageKeys;
 import br.com.carros.i18n.Messages;
 import br.com.carros.model.Carro;
-import br.com.carros.validation.CarroValidator;
-import br.com.carros.validation.ValidationConstants;
-import br.com.carros.validation.ValidatorResult;
 
 /*
  * 1. nome obrigatório 

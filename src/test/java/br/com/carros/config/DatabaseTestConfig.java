@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -25,7 +26,7 @@ public final class DatabaseTestConfig {
 	            throw new IllegalStateException("schema.sql não encontrado nos recursos de teste.");
 	        }
 	        
-	        try (BufferedReader reader = new BufferedReader(new InputStreamReader(input));
+	        try (BufferedReader reader = new BufferedReader(new InputStreamReader(input, StandardCharsets.UTF_8));
 	        		Statement stmt = connection.createStatement()) {
 	        	
 	        	StringBuilder sql = new StringBuilder();
@@ -34,7 +35,7 @@ public final class DatabaseTestConfig {
 	        		sql.append(linha).append("\n");
 	        	}
 	        	
-	        	// Executa o script de criação completo
+	        	// Executa cada comando SQL individualmente
 	        	String[] comandos = sql.toString().split(";");
 
                 for (String comando : comandos) {

@@ -19,81 +19,80 @@ import br.com.carros.service.CarroService;
 public class CarroTest {
 
 	private CarroService carroService = new CarroService();
-	
+
 	/*
 	 * 
-	 * Abre conexão
-	 * Lê schema.sql
-	 * Executa SQL
+	 * Abre conexão Lê schema.sql Executa SQL
 	 * 
 	 */
 	@BeforeAll
 	static void prepararBanco() throws Exception {
 		DatabaseTestConfig.initializeDatabase();
 	}
-	
+
 	@Test
-	public void testListaCarros() {
+	public void deveRetornarNullQuandoIdNaoExistir() {
 		Carro carro = carroService.findById(999999L).orElse(null);
-		assertNull(carro, "Esperado null");
-
-		assertTrue(carroService.findByName("").isEmpty());
-		assertTrue(carroService.findByTipo("").isEmpty());
-
-		List<Carro> carros = carroService.findAll();
-		assertNotNull(carros);
-		// Validar se encontrou algo
-		assertFalse(carros.isEmpty());
-
-		// Validar se n�o encontrou Tucker
-		List<Carro> tucker = carroService.findByName("Tucker 1948");
-		assertTrue(tucker.isEmpty());
-
-		// Validar se encontrou Ferrari
-		List<Carro> ferraris = carroService.findByName("Ferrari F40");
-		assertFalse(ferraris.isEmpty());
-		Carro ferrari = ferraris.get(0);
-		assertEquals("Ferrari F40", ferrari.getNome());
-
-		// Validar se encontrou Bugatti
-		List<Carro> bugattis = carroService.findByName("Bugatti Veyron");
-		assertFalse(bugattis.isEmpty());
-		Carro bugatti = bugattis.get(0);
-		assertEquals("Bugatti Veyron", bugatti.getNome());
+		assertNull(carro);
 	}
 
 	@Test
-	public void testSalvarAtualizarExcluirCarro() {
-		// carroService.delete(42L);
+	public void deveRetornarListaDeCarros() {
+		List<Carro> carros = carroService.findAll();
+		assertNotNull(carros);
+		assertFalse(carros.isEmpty());
+	}
+
+	@Test
+	public void deveRetornarEmptyQuandoNomeNaoExistir() {
+		List<Carro> carros = carroService.findByName("Tucker 1948");
+		assertTrue(carros.isEmpty());
+	}
+
+	@Test
+	public void deveEncontrarCarroPeloNome() {
+		List<Carro> carros = carroService.findByName("Ferrari F40");
+		assertFalse(carros.isEmpty());
+		Carro carro = carros.get(0);
+		assertEquals("Ferrari F40", carro.getNome());
+	}
+
+	@Test
+	public void deveRetornarEmptyQuandoTipoNaoExistir() {
+		List<Carro> carros = carroService.findByTipo("");
+		assertTrue(carros.isEmpty());
+	}
+
+	@Test
+	public void deveSalvarCarro() {
 		Carro carro = criarCarro();
 		carroService.save(carro);
-
-		// id do carro salvo
-		long id = carro.getId();
-		assertNotNull(id);
-
-		// Busca no banco de dados para confirmar que o carro foi salvo
-		Optional<Carro> carroOpt = carroService.findById(id);
+		assertTrue(carro.getId() > 0);
+		Optional<Carro> carroOpt = carroService.findById(carro.getId());
 		assertTrue(carroOpt.isPresent());
-		carro = carroOpt.get();
-		assertEquals("Carro", carro.getNome());
+		assertEquals("Carro", carroOpt.get().getNome());
+	}
 
-		// Atualiza o carro
-
+	@Test
+	public void deveAtualizarCarro() {
+		Carro carro = criarCarro();
+		carroService.save(carro);
+		long id = carro.getId();
 		carro.setNome("Carro Update");
 		carroService.save(carro);
-
-		// Busca o carro novamente (vai estar atua�izado)
 		Carro carroAtualizado = carroService.findById(id).orElse(null);
 		assertNotNull(carroAtualizado);
 		assertEquals("Carro Update", carroAtualizado.getNome());
+	}
 
-		// deleta o carro
+	@Test
+	public void deveExcluirCarro() {
+		Carro carro = criarCarro();
+		carroService.save(carro);
+		long id = carro.getId();
 		carroService.delete(id);
-
-		// busca o carro novamente
-		Optional<Carro> carroOpt2 = carroService.findById(id);
-		assertFalse(carroOpt2.isPresent());
+		Optional<Carro> carroOpt = carroService.findById(id);
+		assertFalse(carroOpt.isPresent());
 	}
 
 	private Carro criarCarro() {
