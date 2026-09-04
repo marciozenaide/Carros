@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import br.com.carros.config.DatabaseTestConfig;
@@ -28,6 +29,11 @@ public class CarroTest {
 	@BeforeAll
 	static void prepararBanco() throws Exception {
 		DatabaseTestConfig.initializeDatabase();
+	}
+	
+	@BeforeEach
+	void resetarBanco() throws Exception {
+	    DatabaseTestConfig.resetDatabase();
 	}
 
 	@Test
