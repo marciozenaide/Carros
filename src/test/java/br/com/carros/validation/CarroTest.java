@@ -22,15 +22,18 @@ public class CarroTest {
 	private CarroService carroService = new CarroService();
 
 	/*
-	 * 
-	 * Abre conexão Lê schema.sql Executa SQL
-	 * 
+	 * Abre a conexão, lê o schema.sql e executa todos os comandos SQL.
+	 * Executado uma única vez antes de todos os testes.
 	 */
 	@BeforeAll
 	static void prepararBanco() throws Exception {
 		DatabaseTestConfig.initializeDatabase();
 	}
 	
+	/*
+	 * Executa antes de cada teste para restaurar os dados iniciais.
+	 * Lê o schema.sql, mas não executa o CREATE TABLE.
+	 */
 	@BeforeEach
 	void resetarBanco() throws Exception {
 	    DatabaseTestConfig.resetDatabase();
