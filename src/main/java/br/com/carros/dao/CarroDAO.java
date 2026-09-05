@@ -113,7 +113,7 @@ public class CarroDAO extends BaseDAO {
 	
 	public Carro save(Carro carro) {
 		if (carro == null) {
-		    throw new IllegalArgumentException("Carro n�o pode ser nulo.");
+		    throw new IllegalArgumentException("Carro não pode ser nulo.");
 		}
 		LOGGER.info("Salvando carro: " + carro.getNome());
 		boolean novoCarro = carro.getId() == null;
