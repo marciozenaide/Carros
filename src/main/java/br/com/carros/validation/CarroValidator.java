@@ -25,12 +25,21 @@ public class CarroValidator {
 		validarTamanho(MessageKeys.ERRO_URL_FOTO_TAMANHO, carro.getUrlFoto(),ValidationConstants.TAMANHO_TEXTO, result);
 		validarTamanho(MessageKeys.ERRO_URL_VIDEO_TAMANHO, carro.getUrlVideo(),ValidationConstants.TAMANHO_TEXTO, result);
 		
+		validarURL(MessageKeys.ERRO_URL_FOTO_INVALIDA, carro.getUrlFoto(), result);
+		validarURL(MessageKeys.ERRO_URL_VIDEO_INVALIDA, carro.getUrlVideo(), result);
+		
 		// coordenadas
 		validarCoordenada(carro.getLatitude(),ValidationConstants.LIMITE_LATITUDE,MessageKeys.ERRO_LATITUDE_OBRIGATORIO,MessageKeys.ERRO_LATITUDE_INVALIDA,result);
 		validarCoordenada(carro.getLongitude(),ValidationConstants.LIMITE_LONGITUDE,MessageKeys.ERRO_LONGITUDE_OBRIGATORIO,MessageKeys.ERRO_LONGITUDE_INVALIDA,result);
 
 		return result;
 
+	}
+
+	private void validarURL(String chave, String campo, ValidatorResult result) {
+		if (campo == null || campo.trim().isEmpty() || !UrlValidator.isValidUrl(campo.trim())) {
+			result.addErro(Messages.get(chave));
+		}
 	}
 
 	private void validarObrigatorio(String chave, String campo, ValidatorResult result) {

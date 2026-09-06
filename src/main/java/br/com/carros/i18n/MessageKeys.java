@@ -23,5 +23,8 @@ public final class MessageKeys {
 	
 	public static final String ERRO_LATITUDE_INVALIDA = "erro.latitude.invalida";
 	public static final String ERRO_LONGITUDE_INVALIDA = "erro.longitude.invalida";
+	
+	public static final String ERRO_URL_FOTO_INVALIDA = "erro.url.foto.invalida";
+	public static final String ERRO_URL_VIDEO_INVALIDA = "erro.url.video.invalida";
 
 }
