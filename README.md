@@ -1,21 +1,47 @@
-# 🚗 Carros
+🚗 Carros
 
-Projeto Java desenvolvido como um laboratório prático para demonstrar a **evolução do desenvolvimento de aplicações web no ecossistema Java**, partindo do acesso direto ao banco de dados com JDBC até uma arquitetura moderna utilizando **Spring Boot e Angular**.
+O Carros é um projeto Java desenvolvido como um laboratório prático para estudar a evolução da plataforma Java e das arquiteturas de aplicações web, utilizando uma mesma aplicação como base para experimentar diferentes versões da linguagem, frameworks e tecnologias.
 
-Mais do que uma API CRUD, o projeto tem como objetivo mostrar **como as responsabilidades, abstrações e tecnologias evoluíram ao longo do tempo**, permitindo comparar diferentes abordagens para resolver problemas semelhantes.
+O projeto possui duas linhas principais de evolução:
 
----
+☕ Evolução da plataforma Java
 
-## 🎯 Objetivo
+A aplicação será evoluída progressivamente entre diferentes versões do Java:
 
-O projeto **Carros** acompanha a evolução de uma aplicação de gerenciamento de veículos através de diferentes tecnologias e arquiteturas Java.
+2026
+ │
+ ├── Java 8
+ ├── JDBC
+ ├── DAO
+ ├── testes
+ │
+ ├── JAX-RS
+ │
+ ├── Java 11
+ │
+ ├── Spring
+ ├── Spring Boot
+ ├── JPA/Hibernate
+ │
+ ├── Java 17
+ │
+ ├── Java 21
+ │
+ ├── Java 25
+ │
+ └── Angular
 
-A evolução planejada é:
+A cada evolução são estudados os novos recursos da plataforma, mudanças de APIs, melhorias da linguagem e impactos na implementação existente.
 
-```text
+🌐 Evolução da arquitetura web
+
+Paralelamente, a aplicação evolui de uma implementação de baixo nível para uma arquitetura moderna:
+
 JDBC
   ↓
 Servlets / JSP
+  ↓
+JAX-RS
   ↓
 JPA / Hibernate
   ↓
@@ -24,7 +50,10 @@ Spring Framework
 Spring Boot
   ↓
 Angular
-```
+
+Dessa forma, o projeto permite observar não apenas como a linguagem Java evoluiu, mas também como as arquiteturas e ferramentas utilizadas no desenvolvimento de aplicações Java evoluíram ao longo do tempo.
+
+O objetivo é manter as diferentes etapas registradas no histórico do Git, permitindo comparar as implementações e compreender quais problemas cada tecnologia procurou resolver.
 
 Ao final, a arquitetura será composta por:
 
