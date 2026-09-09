@@ -1,41 +1,42 @@
-🚗 Carros
+# 🚗 Carros
 
-O Carros é um projeto Java desenvolvido como um laboratório prático para estudar a evolução da plataforma Java e das arquiteturas de aplicações web, utilizando uma mesma aplicação como base para experimentar diferentes versões da linguagem, frameworks e tecnologias.
+O **Carros** é um projeto Java desenvolvido como um **laboratório prático de evolução tecnológica e arquitetural**.
 
-O projeto possui duas linhas principais de evolução:
+A mesma aplicação é utilizada como base para estudar, construir, evoluir e comparar diferentes abordagens de desenvolvimento de aplicações Java.
 
-☕ Evolução da plataforma Java
+O projeto acompanha duas linhas principais de evolução:
 
-A aplicação será evoluída progressivamente entre diferentes versões do Java:
+- ☕ evolução da plataforma Java;
+- 🌐 evolução das arquiteturas e tecnologias utilizadas em aplicações web.
 
-2026
- │
- ├── Java 8
- ├── JDBC
- ├── DAO
- ├── testes
- │
- ├── JAX-RS
- │
- ├── Java 11
- │
- ├── Spring
- ├── Spring Boot
- ├── JPA/Hibernate
- │
- ├── Java 17
- │
- ├── Java 21
- │
- ├── Java 25
- │
- └── Angular
+A evolução é registrada no **Git**, permitindo acompanhar não apenas o resultado final, mas também as decisões, refatorações, correções e mudanças tecnológicas realizadas durante o desenvolvimento.
 
-A cada evolução são estudados os novos recursos da plataforma, mudanças de APIs, melhorias da linguagem e impactos na implementação existente.
+---
 
-🌐 Evolução da arquitetura web
+# 🎯 Objetivos
 
-Paralelamente, a aplicação evolui de uma implementação de baixo nível para uma arquitetura moderna:
+## ☕ Evolução da plataforma Java
+
+O projeto será utilizado para acompanhar a evolução da plataforma Java:
+
+```text
+Java 8
+  ↓
+Java 9
+  ↓
+Java 11
+  ↓
+Java 17
+  ↓
+Java 21
+  ↓
+Java 25
+
+A cada etapa serão estudados recursos introduzidos na linguagem e na plataforma, novas APIs, mudanças de sintaxe, melhorias e impactos sobre um código existente.
+
+🌐 Evolução arquitetural
+
+Paralelamente, a aplicação evolui progressivamente de uma implementação de baixo nível para uma arquitetura moderna:
 
 JDBC
   ↓
@@ -51,260 +52,305 @@ Spring Boot
   ↓
 Angular
 
-Dessa forma, o projeto permite observar não apenas como a linguagem Java evoluiu, mas também como as arquiteturas e ferramentas utilizadas no desenvolvimento de aplicações Java evoluíram ao longo do tempo.
+O objetivo é compreender não apenas como utilizar cada tecnologia, mas também quais problemas cada nova abstração procura resolver.
 
-O objetivo é manter as diferentes etapas registradas no histórico do Git, permitindo comparar as implementações e compreender quais problemas cada tecnologia procurou resolver.
+📌 Estado atual
 
-Ao final, a arquitetura será composta por:
+O projeto já passou da implementação inicial do CRUD JDBC e possui uma evolução significativa registrada no Git.
 
-```text
-┌──────────────┐
-│   Angular    │
-│  Frontend    │
-└──────┬───────┘
-       │ HTTP / JSON
-       ▼
-┌────────────────────┐
-│    Spring Boot     │
-│     REST API       │
-└─────────┬──────────┘
-          │
-          ▼
-┌────────────────────┐
-│   JPA / Hibernate  │
-│    Persistence     │
-└─────────┬──────────┘
-          │
-          ▼
-┌────────────────────┐
-│       MySQL        │
-└────────────────────┘
-```
+Evolução	Status	Resultado
+Estrutura inicial JDBC	
+✅ Concluída	Base da aplicação CRUD JDBC	
+✅ Concluído	Persistência manual utilizando JDBC Aplicação Web	
+✅ Concluída	Servlets, HTTP e renderização Validação e internacionalização	
+✅ Concluídas	Validação, ResourceBundle e mensagens Testes automatizados	
+✅ Implementados	Testes unitários e de integração H2	
+✅ Implementado	Banco para contexto de testes Maven	
+✅ Implementado	Build e gerenciamento de dependências JAX-RS	
+🚧 Em desenvolvimento	API REST Docker	
+🚧 Inicial	Containerização JPA / Hibernate	
+📋 Planejado	ORM Spring Framework	
+📋 Planejado	IoC e Dependency Injection Spring Boot	
+📋 Planejado	API REST moderna Angular	
+📋 Planejado	Frontend separado
 
----
+O status acima representa a evolução registrada no histórico do projeto. Algumas melhorias são transversais à arquitetura, como Maven, testes, H2 e Docker.
 
-# 🛠️ Tecnologias
+🌳 Histórico de evolução
 
-### Backend
+O histórico do Git faz parte da proposta do projeto.
 
-* Java
-* JDBC
-* Servlets
-* JSP
-* JPA
-* Hibernate
-* Spring Framework
-* Spring Boot
-* Spring Data JPA
-* Spring Data JDBC
-* REST API
-* Maven
+A evolução começou com a estrutura inicial da fase JDBC:
 
-### Frontend
+3ab7561
+Inicia fase 1 - estrutura JDBC
 
-* Angular
-* TypeScript
-* HTML
-* CSS
+A partir dessa base, o projeto evoluiu progressivamente.
 
-### Banco de Dados
-
-* MySQL
-* Flyway
-
----
-
-# 🏗️ Arquitetura
-
-Na evolução para uma arquitetura baseada em Spring Boot, o projeto será organizado em camadas, separando as responsabilidades da aplicação:
-
-```text
-Controller
-    ↓
-Service
-    ↓
-Repository
-    ↓
-Database
-```
-
-### Camadas
-
-| Camada       | Responsabilidade                            |
-| ------------ | ------------------------------------------- |
-| `Controller` | Exposição dos endpoints REST                |
-| `Service`    | Regras de negócio                           |
-| `Repository` | Acesso aos dados                            |
-| `Entity`     | Representação das entidades persistidas     |
-| `DTO`        | Transferência de dados entre as camadas/API |
-
-Essa separação permite reduzir o acoplamento e facilita a manutenção, evolução e testes da aplicação.
-
----
-
-# 🗄️ Banco de Dados
-
-O projeto utiliza **MySQL** como banco de dados.
-
-O controle da evolução do schema é realizado utilizando **Flyway**, permitindo que as alterações estruturais sejam versionadas e executadas de maneira previsível.
-
-Banco utilizado:
-
-```text
-carros
-```
-
-## Migrations
-
-| Versão | Descrição                                |
-| ------ | ---------------------------------------- |
-| `V1`   | Criação inicial do banco                 |
-| `V2`   | Ajuste dos tipos de latitude e longitude |
-| `V3`   | Recuperação/correção do encoding UTF-8   |
-
-As migrations ficam versionadas junto ao código-fonte, permitindo reproduzir a estrutura do banco em diferentes ambientes.
-
----
-
-# 🚀 Como executar
-
-## Pré-requisitos
-
-Antes de executar o projeto, tenha instalado:
-
-* Java
-* Maven
-* MySQL
-* Git
-
-Clone o repositório:
-
-```bash
-git clone https://github.com/marciozenaide/Carros.git
-```
-
-Entre no diretório:
-
-```bash
-cd Carros
-```
-
-Configure as credenciais e propriedades do banco de dados de acordo com a configuração da aplicação.
-
-Depois execute:
-
-```bash
-mvn spring-boot:run
-```
-
----
-
-# 📁 Estrutura
-
-A estrutura da aplicação segue a separação por responsabilidades:
-
-```text
-src/
-└── main/
-    └── java/
-        └── br/
-            └── com/
-                └── carros/
-                    ├── controller/
-                    ├── service/
-                    ├── repository/
-                    ├── entity/
-                    ├── dto/
-                    └── util/
-```
-
-Durante a fase JDBC, algumas responsabilidades ficam concentradas em classes de infraestrutura, como `DAO`, `ConnectionFactory` e utilitários.
-
----
-
-# 📚 Evolução do Projeto
-
-O desenvolvimento do Carros é dividido em fases.
-
-## Fase 1 — JDBC
-
-Objetivo: compreender o acesso ao banco de dados utilizando as APIs de baixo nível do Java.
-
-### Implementado
-
-* [x] Configuração do Git e GitHub
-* [x] Estrutura inicial do projeto
-* [x] Configuração do MySQL
-* [x] Connection Factory
-* [x] Controle de migrations com Flyway
-* [x] CRUD utilizando JDBC
-* [x] `PreparedStatement`
-* [x] Mapeamento de `ResultSet` para entidades
-* [x] Tratamento de valores `NULL`
-* [x] Uso de `Optional`
-* [x] Tratamento de exceções de banco
-* [x] Logger
-* [x] Internacionalização com `ResourceBundle`
-* [x] Validação
-
-### Evolução do `CarroDAO`
-
-O DAO foi desenvolvido procurando manter o código JDBC organizado e reduzir duplicação.
-
-Principais características:
-
-* SQLs centralizadas em constantes;
-* utilização de `try-with-resources`;
-* `Optional<Carro>` para consultas por ID;
-* `Collections.emptyList()` para consultas sem resultados;
-* método `bindCarro()` para evitar duplicação;
-* método `mapResultSet()` reutilizado;
-* tratamento de `NULL` para valores `Double`;
-* `save()` suportando INSERT e UPDATE;
-* `delete()` retornando `boolean`;
-* exceções de banco encapsuladas em `BancoDeDadosException`.
-
----
-
-## Fase 2 — Servlets / JSP
-
-Objetivo: compreender como aplicações web Java eram estruturadas antes da adoção de frameworks modernos.
-
-Conceitos explorados:
-
-* HTTP
-* Servlets
-* Request / Response
-* Sessions
-* JSP
-* MVC
-* Controllers
-* Formulários
-* Validação
-* Integração entre camada web e DAO
-
----
-
-## Fase 3 — JPA / Hibernate
-
-Objetivo: comparar o acesso manual utilizando JDBC com uma abordagem baseada em ORM.
-
-Conceitos explorados:
-
-* JPA
-* Hibernate
-* `EntityManager`
-* Entidades
-* Mapeamentos
-* Relacionamentos
-* Persistência automática
-* ORM
-
-A ideia é demonstrar o contraste entre:
-
-```text
+Linha de evolução
 JDBC
+ │
+ ├── CRUD
+ │
+ ├── Testes automatizados
+ │
+ ├── Service Layer
+ │
+ ├── Servlets
+ │
+ ├── Validação
+ │
+ ├── Internacionalização
+ │
+ ├── Filtros HTTP
+ │
+ ├── Headers de segurança
+ │
+ └── Testes unitários e de integração
+        │
+        ▼
+      JAX-RS
+        │
+        ├── CarroResource
+        ├── RestApplication
+        ├── Jackson
+        └── API REST
 
+Paralelamente, o projeto recebeu evoluções de infraestrutura e ferramentas:
+
+Maven
+  ↓
+H2
+  ↓
+Testes automatizados
+  ↓
+Docker
+🌿 Branches do projeto
+
+As branches representam diferentes etapas de desenvolvimento.
+
+Branch	Objetivo
+fase-1-crud-jdbc	Implementação do CRUD utilizando JDBC
+build/migrate-to-maven	Migração do projeto para Maven
+test/initialize-h2-schema	Preparação do schema H2 para testes
+test/improve-automated-tests	Evolução dos testes automatizados
+feature/rest-carro-api	Implementação da API REST utilizando JAX-RS
+
+As branches não representam necessariamente fases arquiteturais.
+
+Algumas representam evoluções transversais, como build, testes e infraestrutura.
+
+🧱 Arquitetura
+Arquitetura JDBC
+
+A implementação inicial utiliza acesso manual ao banco:
+
+Application
+     │
+     ▼
+CarroService
+     │
+     ▼
+CarroDAO
+     │
+     ▼
+JDBC
+     │
+     ▼
+MySQL
+
+O CarroDAO concentra as operações de persistência e utiliza recursos da API JDBC diretamente.
+
+Entre as principais características estão:
+
+SQLs centralizadas;
+Connection;
+PreparedStatement;
+ResultSet;
+try-with-resources;
+Optional<Carro>;
+Collections.emptyList();
+bindCarro();
+mapResultSet();
+tratamento de valores NULL;
+save() para INSERT e UPDATE;
+delete() retornando boolean;
+encapsulamento de exceções de banco.
+
+🌐 Aplicação Web
+
+A aplicação evoluiu posteriormente para um modelo web baseado em Servlets.
+
+HTTP Request
+     │
+     ▼
+CarroServlet
+     │
+     ▼
+CarroService
+     │
+     ▼
+CarroDAO
+     │
+     ▼
+JDBC
+     │
+     ▼
+MySQL
+
+Durante essa etapa foram estudados:
+
+HTTP;
+Request / Response;
+Servlets;
+JSP;
+MVC;
+formulários;
+validação;
+sessões;
+renderização HTML;
+integração entre camada web e persistência.
+
+Também foram introduzidos componentes e melhorias como:
+
+CarroHtmlRenderer;
+CharacterEncodingFilter;
+headers de segurança HTTP;
+ResourceBundle;
+MessageKeys;
+melhorias na validação.
+
+🔌 API REST com JAX-RS
+
+A branch feature/rest-carro-api representa a evolução da aplicação para uma API REST utilizando JAX-RS.
+
+Principais componentes desenvolvidos:
+
+CarroResource;
+RestApplication;
+configuração do JAX-RS;
+Jackson;
+serialização e desserialização JSON;
+endpoints HTTP;
+métodos HTTP;
+códigos de status.
+
+Arquitetura atual:
+
+HTTP Request
+     │
+     ▼
+CarroResource
+     │
+     ▼
+CarroService
+     │
+     ▼
+CarroDAO
+     │
+     ▼
+JDBC
+     │
+     ▼
+MySQL
+
+Essa etapa permite estudar uma API REST antes da introdução do Spring Boot.
+
+🧪 Testes automatizados
+
+Os testes fazem parte da evolução do projeto desde as primeiras etapas.
+
+A branch:
+
+test/improve-automated-tests
+
+introduziu e aprimorou diferentes tipos de testes.
+
+Entre eles:
+
+testes unitários do CarroService;
+testes de integração do CarroDAO;
+testes do CarroValidator;
+configuração de banco H2 para testes;
+melhorias na organização dos testes;
+correções relacionadas à codificação.
+
+A intenção é que a evolução arquitetural não aconteça sem preocupação com a qualidade e a verificabilidade do código.
+
+🛠️ Build e infraestrutura Maven
+
+O projeto foi migrado para Maven para centralizar:
+
+dependências;
+compilação;
+testes;
+empacotamento;
+configuração do projeto.
+Docker
+
+O projeto também possui uma configuração inicial de Docker, utilizada como parte da evolução da infraestrutura.
+
+🗄️ Banco de Dados
+
+O banco principal utilizado pelo projeto é o MySQL.
+
+Banco:
+
+carros
+
+Durante os testes também é utilizado H2, permitindo executar testes de persistência em um banco dedicado ao ambiente de testes.
+
+Migrations
+
+A evolução do banco também faz parte da história do projeto.
+
+As alterações do schema são registradas através de migrations versionadas junto ao código-fonte.
+
+Versão	Migration	Objetivo
+V1	Migration inicial	Criação inicial da estrutura do banco
+V2	V2__corrige_encoding_carro.sql	Correção do encoding dos dados de carro
+V3	V3__recupera_encoding_carro.sql	Recuperação do encoding dos dados de carro
+
+As migrations permitem acompanhar a evolução do schema e registrar problemas encontrados e suas respectivas correções.
+
+🗺️ Roadmap
+
+O roadmap representa o caminho planejado do projeto.
+
+Ele é diferente do histórico do Git, que representa aquilo que já foi implementado.
+
+Arquitetura
+JDBC
+  ↓
+Servlets / JSP
+  ↓
+JAX-RS
+  ↓
+JPA / Hibernate
+  ↓
+Spring Framework
+  ↓
+Spring Boot
+  ↓
+Angular
+Java
+Java 8
+  ↓
+Java 9
+  ↓
+Java 11
+  ↓
+Java 17
+  ↓
+Java 21
+  ↓
+Java 25
+
+🗃️ Próxima evolução — JPA / Hibernate
+
+A próxima grande evolução arquitetural será a comparação entre JDBC e ORM.
+
+JDBC
 SQL
  ↓
 PreparedStatement
@@ -312,13 +358,7 @@ PreparedStatement
 ResultSet
  ↓
 Mapeamento manual
-```
-
-e:
-
-```text
 JPA / Hibernate
-
 Entity
  ↓
 EntityManager
@@ -326,215 +366,381 @@ EntityManager
 Hibernate
  ↓
 Database
-```
 
----
+Serão estudados:
 
-## Fase 4 — Spring Framework
+JPA;
+Hibernate;
+ORM;
+entidades;
+mapeamentos;
+relacionamentos;
+EntityManager;
+transações;
+ciclo de vida das entidades;
+diferenças entre JDBC e ORM.
 
-Objetivo: introduzir os conceitos fundamentais do ecossistema Spring.
+🌱 Spring Framework
 
-Conceitos explorados:
+Após a etapa de JPA/Hibernate, serão introduzidos os fundamentos do Spring.
 
-* Inversão de Controle (IoC)
-* Dependency Injection (DI)
-* Beans
-* `@Component`
-* `@Service`
-* `@Repository`
-* `@Controller`
-* Spring MVC
+Principais conceitos:
 
----
+IoC;
+Dependency Injection;
+Beans;
+@Component;
+@Service;
+@Repository;
+@Controller;
+Spring MVC.
 
-## Fase 5 — Spring Boot
+A intenção é compreender os fundamentos do framework antes de utilizar as abstrações oferecidas pelo Spring Boot.
 
-Objetivo: transformar a aplicação em uma API REST moderna utilizando Spring Boot.
+🚀 Spring Boot
 
-Principais recursos:
+A aplicação será posteriormente evoluída para uma API REST baseada em Spring Boot.
 
-* Spring Boot
-* Spring Data JPA
-* REST API
-* JSON
-* Dependency Injection
-* Auto Configuration
-* Profiles
-* Tratamento global de exceções
-* Validação
-* DTOs
-* Repository
-* Service
-* Controller
+Arquitetura prevista:
 
-Arquitetura:
-
-```text
-HTTP Request
-     ↓
+HTTP
+ ↓
 Controller
-     ↓
+ ↓
 Service
-     ↓
+ ↓
 Repository
-     ↓
+ ↓
 JPA / Hibernate
-     ↓
+ ↓
 MySQL
-```
 
----
+Serão estudados:
 
-## Fase 6 — Angular
+Spring Boot;
+Spring Data JPA;
+REST;
+JSON;
+Dependency Injection;
+Auto Configuration;
+Profiles;
+DTOs;
+validação;
+tratamento global de exceções.
 
-Objetivo: desenvolver uma interface web para consumir a API REST.
+🅰️ Angular
 
-Tecnologias:
+Na etapa final, será desenvolvido um frontend separado utilizando Angular.
 
-* Angular
-* TypeScript
-* HTML
-* CSS
-* HTTP Client
+Arquitetura prevista:
 
-Arquitetura final:
+┌─────────────────────┐
+│       Angular       │
+│      Frontend       │
+└──────────┬──────────┘
+           │
+           │ HTTP / JSON
+           ▼
+┌─────────────────────┐
+│     Spring Boot     │
+│      REST API       │
+└──────────┬──────────┘
+           │
+           ▼
+┌─────────────────────┐
+│   JPA / Hibernate   │
+│     Persistence     │
+└──────────┬──────────┘
+           │
+           ▼
+┌─────────────────────┐
+│        MySQL        │
+└─────────────────────┘
 
-```text
-┌─────────────────┐
-│     Angular     │
-│    Frontend     │
-└────────┬────────┘
-         │
-         │ REST / JSON
-         │
-         ▼
-┌─────────────────┐
-│   Spring Boot   │
-│      API        │
-└────────┬────────┘
-         │
-         ▼
-┌─────────────────┐
-│  JPA / Hibernate│
-└────────┬────────┘
-         │
-         ▼
-┌─────────────────┐
-│      MySQL      │
-└─────────────────┘
-```
+Tecnologias previstas:
 
----
+Angular;
+TypeScript;
+HTML;
+CSS;
+HTTP Client.
 
-# 📊 Evolução tecnológica
+☕ Evolução do Java
 
-| Fase | Tecnologia      | Principal objetivo                    |
-| ---- | --------------- | ------------------------------------- |
-| 1    | JDBC            | Acesso direto ao banco                |
-| 2    | Servlets / JSP  | Desenvolvimento web Java              |
-| 3    | JPA / Hibernate | Abstração do acesso a dados           |
-| 4    | Spring          | IoC e Dependency Injection            |
-| 5    | Spring Boot     | APIs REST e configuração simplificada |
-| 6    | Angular         | Aplicação frontend moderna            |
+Uma das características centrais do projeto é utilizar a mesma aplicação para acompanhar a evolução da plataforma Java.
 
----
+Versão	Foco
+Java 8	Base inicial da aplicação
+Java 9	Evolução da plataforma e módulos
+Java 11	Novas APIs e melhorias
+Java 17	Recursos modernos da linguagem
+Java 21	Recursos modernos da plataforma
+Java 25	Recursos recentes da plataforma
 
-# 💡 O que este projeto demonstra?
+A evolução será registrada através de commits, branches e tags quando apropriado.
 
-O Carros procura responder, de forma prática, uma pergunta:
+O objetivo é poder comparar como o mesmo projeto pode evoluir junto com diferentes gerações da plataforma Java.
 
-> **Como uma aplicação Java evoluiu de um código que controla diretamente conexões e SQL para uma arquitetura moderna baseada em APIs, frameworks e abstrações?**
+📊 Evolução tecnológica
+                    CARROS
+                       │
+          ┌────────────┴────────────┐
+          │                         │
+          ▼                         ▼
+   EVOLUÇÃO JAVA             EVOLUÇÃO WEB
+          │                         │
+          ▼                         ▼
+       Java 8                    JDBC
+          ↓                         ↓
+       Java 9                  Servlets
+          ↓                         ↓
+      Java 11                   JAX-RS
+          ↓                         ↓
+      Java 17               JPA / Hibernate
+          ↓                         ↓
+      Java 21                   Spring
+          ↓                         ↓
+      Java 25                Spring Boot
+                                    ↓
+                                  Angular
 
-Ao longo do projeto é possível observar a evolução de responsabilidades como:
+Além dessas duas linhas principais, o projeto evolui transversalmente através de:
 
-```text
-Conexão com banco
-       ↓
+Maven
+  ↓
+Testes
+  ↓
+H2
+  ↓
+Logging
+  ↓
+Validação
+  ↓
+Segurança HTTP
+  ↓
+Docker
+
+▶️ Como executar
+
+Pré-requisitos
+
+Para trabalhar com o projeto localmente:
+
+Java;
+Maven;
+MySQL;
+Git.
+
+A versão do Java deve acompanhar a etapa atual do projeto.
+
+1. Clonar o projeto
+git clone https://github.com/marciozenaide/Carros.git
+cd Carros
+2. Configurar o banco
+
+Crie o banco:
+
+CREATE DATABASE carros;
+
+Configure as credenciais utilizadas pela aplicação.
+
+Exemplo:
+
+db.url=jdbc:mysql://localhost:3306/carros
+db.username=seu_usuario
+db.password=sua_senha
+
+Não versione senhas ou outras credenciais reais no repositório.
+
+3. Compilar
+mvn clean package
+4. Executar os testes
+mvn test
+5. Executar a aplicação
+
+Nas etapas baseadas em Servlets/JSP e JAX-RS, o projeto é empacotado como WAR e deve ser executado em um servidor compatível com a tecnologia utilizada.
+
+A execução através de:
+
+mvn spring-boot:run
+
+será utilizada somente quando o projeto chegar à etapa Spring Boot.
+
+O comando mvn spring-boot:run pertence à futura etapa Spring Boot e não representa a forma de execução da implementação JAX-RS atual.
+
+📚 Principais conceitos estudados
+Java
+Java 8;
+Java 9;
+Java 11;
+Java 17;
+Java 21;
+Java 25;
+evolução da linguagem;
+evolução das APIs;
+modularização;
+compatibilidade entre versões.
+Persistência
+JDBC;
+SQL;
+DAO;
+JPA;
+Hibernate;
+ORM;
+Repository;
+transações.
+Web
+HTTP;
+Servlets;
+JSP;
+MVC;
+JAX-RS;
+REST;
+JSON;
+Status Codes;
+filtros;
+segurança HTTP.
+Arquitetura
+separação de responsabilidades;
+Service Layer;
+Repository;
+DTO;
+IoC;
+Dependency Injection;
+baixo acoplamento;
+testabilidade.
+Qualidade
+testes unitários;
+testes de integração;
+validação;
+logging;
+tratamento de exceções;
+internacionalização.
+Ferramentas
+Maven;
+MySQL;
+H2;
+Docker;
+Git;
+GitHub.
+
+💡 O que este projeto demonstra?
+
+O Carros procura responder, de forma prática:
+
+Como a plataforma Java evoluiu ao longo das diferentes versões?
+
+E também:
+
+Como uma aplicação Java evoluiu de um código que controla diretamente conexões e SQL para uma arquitetura moderna baseada em APIs, ORM, frameworks e frontend separado?
+
+Ao longo do projeto, as responsabilidades evoluem aproximadamente desta forma:
+
+Connection
+    ↓
 SQL manual
-       ↓
+    ↓
 DAO
-       ↓
-ORM
-       ↓
-Repository
-       ↓
+    ↓
 Service
-       ↓
-REST Controller
-       ↓
-Frontend Angular
-```
-
-Assim, o projeto funciona como um **laboratório de aprendizado e comparação de arquiteturas**, e não apenas como uma aplicação CRUD.
-
----
-
-# 🔎 Principais conceitos estudados
-
-* JDBC
-* SQL
-* `Connection`
-* `PreparedStatement`
-* `ResultSet`
-* DAO
-* Servlets
-* JSP
-* MVC
-* JPA
-* Hibernate
-* ORM
-* Spring Framework
-* IoC
-* Dependency Injection
-* Spring Boot
-* Spring Data
-* REST
-* JSON
-* DTO
-* Validação
-* Tratamento de exceções
-* Flyway
-* Angular
-* TypeScript
-* Maven
-
----
-
-# 📝 Status do projeto
-
-O projeto está em **evolução contínua**.
-
-O objetivo não é apenas adicionar novas tecnologias, mas **implementar a mesma aplicação utilizando diferentes abordagens**, permitindo comparar suas vantagens, limitações, complexidade e nível de abstração.
-
-```text
-JDBC
-  │
-  ├── Controle manual
-  ├── SQL explícito
-  └── Baixo nível
-       │
-       ▼
-Servlets / JSP
-       │
-       ▼
+    ↓
+Servlet
+    ↓
+JAX-RS Resource
+    ↓
 JPA / Hibernate
-       │
-       ▼
-Spring Framework
-       │
-       ▼
+    ↓
+Repository
+    ↓
+Spring
+    ↓
 Spring Boot
-       │
-       ▼
+    ↓
 Angular
-```
 
----
+O projeto funciona, portanto, como um laboratório de aprendizado, experimentação, comparação e evolução de tecnologias e arquiteturas Java.
 
-# 👨‍💻 Autor
+🧭 Filosofia do projeto
 
-**Marcio**
+O projeto é desenvolvido de forma incremental.
 
-Projeto desenvolvido para estudo, experimentação e aprofundamento em desenvolvimento de aplicações Java e tecnologias relacionadas.
+Cada evolução deve procurar responder a uma pergunta técnica:
 
----
+Como funciona o acesso ao banco sem ORM?
+Quais responsabilidades pertencem ao DAO?
+Como uma aplicação Java atende uma requisição HTTP?
+O que muda quando saímos de HTML renderizado no servidor para REST?
+Quais problemas o ORM resolve?
+O que o Spring abstrai?
+O que o Spring Boot simplifica?
+Como separar frontend e backend?
+O que muda entre diferentes versões do Java?
+Quais são os benefícios e custos de cada abstração?
+
+A intenção não é simplesmente chegar à arquitetura final.
+
+A própria evolução da aplicação é o objeto de estudo.
+
+🚧 Status
+
+Em desenvolvimento.
+
+O projeto já possui:
+
+base JDBC;
+CRUD completo;
+camada de serviço;
+aplicação web com Servlets;
+validação;
+internacionalização;
+logging;
+testes unitários;
+testes de integração;
+H2 para testes;
+Maven;
+API REST em evolução com JAX-RS;
+configuração inicial de Docker;
+migrations de banco versionadas.
+
+Próximas etapas:
+
+JAX-RS
+  ↓
+JPA / Hibernate
+  ↓
+Spring Framework
+  ↓
+Spring Boot
+  ↓
+Angular
+
+Paralelamente:
+
+Java 8
+  ↓
+Java 9
+  ↓
+Java 11
+  ↓
+Java 17
+  ↓
+Java 21
+  ↓
+Java 25
+
+O histórico de commits, branches e tags é parte integrante da documentação do projeto.
+
+👨‍💻 Autor
+
+Marcio Zenaide
+
+Projeto desenvolvido para estudo, experimentação e aprofundamento em:
+
+desenvolvimento Java;
+APIs REST;
+persistência de dados;
+arquitetura de software;
+testes automatizados;
+frameworks;
+infraestrutura;
+desenvolvimento frontend.
